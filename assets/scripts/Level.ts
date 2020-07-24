@@ -28,9 +28,6 @@ export default class Level extends cc.Component {
 
     private initItem(){
         this.scrollView.content.removeAllChildren();
-
-        
-
         for (let i = 0; i < 99; i++) {
             
             let lv = i;

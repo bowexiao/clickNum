@@ -307,7 +307,24 @@ export default class Game extends cc.Component {
         }
 
         if(speed > 0){
-            this.check();
+            this.scheduleOnce(()=>{
+                switch (speed) {
+                    case 1:
+                        this.playEffect('star1');
+                        break;
+                    case 2:
+                        this.playEffect('star2');
+                        break;
+                    case 3:
+                        this.playEffect('star3');
+                        break;
+                    case 4:
+                        this.playEffect('star4');
+                        break;
+                    default:
+                        break;
+                }
+            },moveTime)
         }
 
         if(!right && tempGird == null){
@@ -316,6 +333,17 @@ export default class Game extends cc.Component {
         }
         
     }
+
+    //消失音效
+    playEffect(url){
+        cc.loader.loadRes('sound/sound/'+ url ,cc.AudioClip,(err,res)=>{
+            let effectId =  cc.audioEngine.playEffect(res,false);
+            cc.audioEngine.setFinishCallback(effectId,()=>{
+                this.check();
+            })
+        })
+    }
+
 
     //增加格子
     private addGirds(num) {
